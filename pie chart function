@@ -1,0 +1,79 @@
+newG = {}
+new4 = {}
+newE = {}
+newC = {}
+newEV = {}
+n = 88
+Granks = list(grouper(rankGG, n))
+newG = {Gaccs[i]: Granks[i] for i in range(len(Gaccs))}
+G4ranks = list(grouper(rank44, n))
+new4 = {G4accs[i]: G4ranks[i] for i in range(len(G4accs))}
+Eranks = list(grouper(rankEE, n))
+newE = {Eaccs[i]: Eranks[i] for i in range(len(Eaccs))}
+Cranks = list(grouper(rankCC, n))
+newC = {Caccs[i]: Cranks[i] for i in range(len(Caccs))}
+EVranks = list(grouper(rankENV, n))
+newEV = {ENVacc[i]: EVranks[i] for i in range(len(ENVacc))}
+new = Merge(newE, new4, newG, newC) #merged for export
+
+gg = group_reacts(newG)
+g44 = group_reacts(new4)
+ee = group_reacts(newE)
+cc = group_reacts(newC)
+evv = EV_group_reacts(newEV)
+
+food_reactivity=Merge(gg,g44,ee,cc)
+fdf = pd.DataFrame(food_reactivity)
+edf = pd.DataFrame(evv)
+pmr = pd.concat([fdf, edf], axis= 1)
+pmrs = pmr.reindex(sorted(pmr.columns), axis=1)
+
+def pie_charts(food,env):
+    row = food.loc['Total']
+    prek=[]
+    pre=[]
+    ptr = "-202"
+    for i in row:
+        pre.append(i)
+    for ii in food.keys():
+        prek.append(ii[1].replace(ptr,""))
+    try:
+        rowe=env.loc['Total']
+        for iii in rowe:
+            pre.append(iii)
+        for iiii in env.keys():
+            prek.append(iiii[1].replace(ptr,""))
+    except KeyError:
+        pass
+
+    if len(prek)==1:
+        colors =['blue']
+        fig,ax = plt.subplots()
+        wedges,texts,autotexts = ax.pie(pre, labels=prek,colors=colors, autopct=lambda p:'{:.1f}'.format(p*sum(pre)/100))
+        ax.axis('equal')
+        plt.show()
+    elif len(prek)==2:
+        colors = ['green','blue']
+        fig,ax = plt.subplots()
+        wedges,texts,autotexts = ax.pie(pre, labels=prek,colors=colors, autopct=lambda p:'{:.1f}'.format(p*sum(pre)/100))
+        ax.axis('equal')
+        plt.show()
+    elif len(prek)==3:
+        colors = ['green','blue','gray']
+        fig,ax = plt.subplots()
+        wedges,texts,autotexts = ax.pie(pre, labels=prek,colors=colors, autopct=lambda p:'{:.1f}'.format(p*sum(pre)/100))
+        ax.axis('equal')
+        plt.show()
+    elif len(prek)==4:
+        colors = ['red','green','blue','gray']
+        fig,ax = plt.subplots()
+        wedges,texts,autotexts = ax.pie(pre, labels=prek,colors=colors, autopct=lambda p:'{:.1f}'.format(p*sum(pre)/100))
+        ax.axis('equal')
+        plt.show()
+    elif len(prek)==5:
+        colors = ['blue','gray','green','red','purple']
+        fig,ax = plt.subplots()
+        wedges,texts,autotexts = ax.pie(pre, labels=prek,colors=colors,startangle=90, autopct=lambda p:'{:.1f}'.format(p*sum(pre)/100))
+        ax.axis('equal')
+        plt.show()
+pie_charts(fdf,edf)
