@@ -29,14 +29,19 @@ pmr = pd.concat([fdf, edf], axis= 1)
 pmrs = pmr.reindex(sorted(pmr.columns), axis=1)
 
 def pie_charts(food,env):
-    row = food.loc['Total']
     prek=[]
     pre=[]
     ptr = "-202"
-    for i in row:
-        pre.append(i)
-    for ii in food.keys():
-        prek.append(ii[1].replace(ptr,""))
+    
+    try:    
+        row = food.loc['Total']
+        for i in row:
+            pre.append(i)
+        for ii in food.keys():
+            prek.append(ii[1].replace(ptr,""))
+    except KeyError:
+        pass
+    
     try:
         rowe=env.loc['Total']
         for iii in rowe:
