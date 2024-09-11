@@ -62,34 +62,11 @@ def pie_charts(food,env):
         if 'ENV' in l:
             c.append('purple')
 
-    if len(prek)==1:
-        color_entry(colors,prek)
-        fig,ax = plt.subplots()
-        wedges,texts,autotexts = ax.pie(pre, labels=prek,colors=colors, autopct=lambda p:'{:.1f}'.format(p*sum(pre)/100))
-        ax.axis('equal')
-        plt.show()
-    elif len(prek)==2:
-        color_entry(colors,prek)
-        fig,ax = plt.subplots()
-        wedges,texts,autotexts = ax.pie(pre, labels=prek,colors=colors, autopct=lambda p:'{:.1f}'.format(p*sum(pre)/100))
-        ax.axis('equal')
-        plt.show()
-    elif len(prek)==3:
-        color_entry(colors,prek)
-        fig,ax = plt.subplots()
-        wedges,texts,autotexts = ax.pie(pre, labels=prek,colors=colors, autopct=lambda p:'{:.1f}'.format(p*sum(pre)/100))
-        ax.axis('equal')
-        plt.show()
-    elif len(prek)==4:
-        color_entry(colors,prek)
-        fig,ax = plt.subplots()
-        wedges,texts,autotexts = ax.pie(pre, labels=prek,colors=colors, autopct=lambda p:'{:.1f}'.format(p*sum(pre)/100))
-        ax.axis('equal')
-        plt.show()
-    elif len(prek)==5:
-        color_entry(colors,prek)
-        fig,ax = plt.subplots()
-        wedges,texts,autotexts = ax.pie(pre, labels=prek,colors=colors,startangle=90, autopct=lambda p:'{:.1f}%'.format(p*sum(pre)/100))
-        ax.axis('equal')
-        plt.show()
+    
+    color_entry(colors,prek)
+    fig,ax = plt.subplots()
+    wedges,texts,autotexts = ax.pie(pre, labels=prek,colors=colors, autopct=lambda p:'{:.1f}'.format(p*sum(pre)/100))
+    ax.axis('equal')
+    plt.show()
+
 pie_charts(fdf,edf)
