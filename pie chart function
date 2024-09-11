@@ -49,23 +49,20 @@ def pie_charts(food,env):
     except KeyError:
         pass
 
-    colors = []
-    def color_entry(c,l):
-        if 'IgE' in l:
-            c.append('green')
-        if 'IgG4' in l:
-            c.append('gray')
-        if 'IgG' in l:
-            c.append('blue')
-        if 'C3' in l:
-            c.append('red')
-        if 'ENV' in l:
-            c.append('purple')
+    c = []
+    if 'IgE' in prek:
+        c.append('green')
+    if 'IgG4' in prek:
+        c.append('gray')
+    if 'IgG' in prek:
+        c.append('blue')
+    if 'C3' in prek:
+        c.append('red')
+    if 'ENV' in prek:
+        c.append('purple')
 
-    
-    color_entry(colors,prek)
     fig,ax = plt.subplots()
-    wedges,texts,autotexts = ax.pie(pre, labels=prek,colors=colors, autopct=lambda p:'{:.1f}'.format(p*sum(pre)/100))
+    wedges,texts,autotexts = ax.pie(pre, labels=prek,colors=c, autopct=lambda p:'{:.1f}'.format(p*sum(pre)/100))
     ax.axis('equal')
     plt.show()
 
